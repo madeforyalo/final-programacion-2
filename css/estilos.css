@@ -1,0 +1,71 @@
+
+body{
+    font-family: 'Montserrat', sans-serif;
+}
+h1{
+    color: red;
+    font-size: 36px;
+}
+h2{
+    color: black;
+    font-size: 48px;
+    margin: auto;
+}
+#verde{
+background-color: rgb(219, 255, 229);
+}
+#fondo{
+    background-image: url('../images/fondo-contacto.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+.active{
+    border: red solid 1px;
+    border-radius: 24px;
+
+}
+.nav-link{
+    color: #282828;
+}
+.Buscar{
+    width: 50%;
+}
+.form-control{
+    border-radius: 24px;
+   
+}
+
+button{
+    border-radius: 24px;
+    background-color: white;
+    color: black;
+}
+
+button:hover, a .btn:hover{
+    background-color: rgba(8, 231, 247, 0.877);
+    color: white;
+}
+
+a .button{
+    border-radius: 24px;
+    background-color: white;
+    color: black;
+}
+
+th,tr,td {
+    
+    padding: 1px;
+    text-align:center;
+
+}
+table {
+    margin: 1px;
+    background-color: white;
+    border-radius: 24px;
+}
+#tabla{
+    border-radius: 24px;
+}
+a .borrar{
+    color: red;
+}
