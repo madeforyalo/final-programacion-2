@@ -71,18 +71,20 @@ mat_id tinyint,
 foreign key(mat_id) references materias(mat_id),
 foreign key(alu_id) references alumnos(alu_id));
 
+drop table notas;
 create table notas(
 nota_id tinyint primary key auto_increment,
 nota_1 int (3),
 nota_2 int (3),
 nota_final int (3),
-alu_id int,
-mat_id tinyint,
-foreign key(mat_id) references materias(mat_id),
-foreign key(alu_id) references alumnos(alu_id));
+aluxmat_id int,
+foreign key(aluxmat_id) references aluxmat(aluxmat_id));
 
-insert into notas values (null, 5, 6, null, 1, 1);
-
+UPDATE notas SET nota_1=7, nota_2=8, nota_final=4
+            WHERE aluxmat_id = 4;
+select * from aluxmat;
+insert into notas values (null, 5, 6, null, 4);
+insert into notas (nota_1, nota_2) values (7, 7);
 #create table notxaluxmat (
 #notxaluxmat tinyint auto_increment primary key,
 #nota_id tinyint,
@@ -141,3 +143,9 @@ inner join materias on aluxmat.mat_id = materias.mat_id;
 SELECT alu_nom, alu_ape from aluxmat 
 inner join alumnos on aluxmat.alu_id = alumnos.alu_id
 WHERE mat_id = 1;
+
+SELECT notas.aluxmat_id, alumnos.alu_id, alumnos.alu_nom, alumnos.alu_ape, notas.nota_1, notas.nota_2, notas.nota_final
+    FROM notas
+    INNER JOIN aluxmat ON notas.aluxmat_id = aluxmat.aluxmat_id
+    INNER JOIN alumnos ON aluxmat.alu_id = alumnos.alu_id
+    WHERE aluxmat.mat_id = 4;

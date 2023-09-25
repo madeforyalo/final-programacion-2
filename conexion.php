@@ -10,9 +10,16 @@ function conectar(){
     return $c;
 }
 
-function todo(){
+function todoAlumnos(){
     $conn = conectar();
     $sqlMostrar = "SELECT * FROM alumnos;";                    
+    $query = mysqli_query ($conn, $sqlMostrar);    
+    return $query;
+}
+
+function todoProf(){
+    $conn = conectar();
+    $sqlMostrar = "SELECT * FROM profesores;";                    
     $query = mysqli_query ($conn, $sqlMostrar);    
     return $query;
 }
@@ -61,7 +68,7 @@ function loggin(){
 function buscarAlum(){
     $mat_id = $_POST['materia'];
     $c = conectar();
-    $sql="SELECT alumnos.alu_id, alumnos.alu_nom, alumnos.alu_ape, notas.nota_1, notas.nota_2, notas.nota_final
+    $sql="SELECT notas.aluxmat_id, alumnos.alu_id, alumnos.alu_nom, alumnos.alu_ape, notas.nota_1, notas.nota_2, notas.nota_final
     FROM notas
     INNER JOIN aluxmat ON notas.aluxmat_id = aluxmat.aluxmat_id
     INNER JOIN alumnos ON aluxmat.alu_id = alumnos.alu_id
@@ -114,5 +121,21 @@ $c = conectar();
 $sql = "SELECT car_id, car_desc FROM carreras ORDER BY car_desc ASC";
 $query = mysqli_query($c, $sql);
 return $query;
+}
+
+function guardarNota(){
+    $aluxmat = $_POST ['aluxmat_id'];
+    $p1 = $_POST ['nota_1'];
+    $p2 = $_POST ['nota_2'];
+    $final = $_POST ['nota_final'];
+    $c = conectar();
+    $sql = "UPDATE notas SET nota_1=$p1, nota_2=$p2, nota_final=$final
+            WHERE aluxmat_id = $aluxmat";
+    $query = mysqli_query($c, $sql);
+    return $query;
+    #$_SESSION['mensaje'] = 'Los datos fueron actualizados';
+    #$_SESSION['tipo_mensaje'] = 'warning';
+    #Header("location: profesor.php");
+    
 }
 ?>

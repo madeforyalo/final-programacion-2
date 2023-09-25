@@ -9,7 +9,7 @@ include "header.php";
 
 <a href="index.php">Agregar Alumnos</a>
 <a href="inscripcion.php">Inscripcion</a>
-<a href="#">Agregar Profesor</a>
+<a href="agregar_profesor.php">Agregar Profesor</a>
 <a href="#">Agregar Materia</a>
 <a href="#">Agregar Carrera</a>
 
