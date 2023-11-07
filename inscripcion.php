@@ -73,20 +73,20 @@ include "header.php";
                 <div>
                     <button type="submit" name="btnBuscar">Buscar</button>
                 </div>
-            </form>
-            <form action="" method="post">
+            <!-- </form>
+            <form action="" method="post"> -->
             <?php
             if (isset($_POST['btnBuscar'])){
                 $bcr=materias();                                
             ?>
             <div>
                 <label for="alumnos">Alumno: </label>
-                <select name="alumnos" id="alumnos">
+                <select name="idalumnos" id="alumnos">
                     <option value="0" selected disabled>seleccione un alumno...</option>
                     <?php
                     $query = alumnos();
                     while($row = mysqli_fetch_assoc($query)){
-                        ?><option value="<?php $alu_id = $row['alu_id'];?>"><?php echo $row['alu_ape'].' ' .$row['alu_nom'];?></option>
+                        ?><option value="<?php $row['alu_id']; ?>"><?php echo $row['alu_ape'].' ' .$row['alu_nom'];?></option>
                     <?php
                     };
                     ?>
@@ -116,14 +116,12 @@ include "header.php";
                                     while($registro=mysqli_fetch_array($bcr)){ //muestra las filas relacionadas con la posicion
                                 ?>
                                         <tr>
+                                            <input type="text" value="<?php echo $registro[0]?>" name="idmateria" style="display: none;">
                                             <td><?php echo $registro[0]?></td>
                                             <td><?php echo $registro[1]?></td>
                                             <td></td>
-                                            <td><a href="insAlumno.php?mat=<?php echo $registro[0]?>&alu=<?php echo $alu_id;?>" title="inscribir" style="margin-right: 15px" name="agregar" style="<?php $show ?>"><i class="fa-solid fa-arrow-up-from-bracket"></i></a>
-                                            <?php if(isset($_GET['agregar'])){ ?>                                            
-                                                <a href="ver.php?id=<?php echo $registro[0]?>" method="get" title="Borrar"><i class="fa-solid fa-trash-can" style="color: red;"></i></a></td>                                            
-                                                <?php $show = "display: none;"; } ?>
-                                                </tr>
+                                            <td><button type="submit" name="inscribir">inscribir</button></td>
+                                        </tr>
                                 <?php
                                     }
                                 ?>
@@ -133,4 +131,29 @@ include "header.php";
             </div>
             <?php }?> 
         </form>
+        <?php
+            if (isset($_POST['inscribir'])){
+                $alu_id = $_POST['idalumnos'];
+                echo $alu_id;
+                $mat_id = $_POST['idmateria'];
+                echo $mat_id;
+                // $sql="INSERT INTO aluxmat VALUE (null, $alu_id, $mat_id);";
+                // $query=mysqli_query($c, $sql);
+                // // Obtener el último valor generado
+                // $ultimoID = mysqli_insert_id($c);
+                // if(mysqli_affected_rows($sql)){
+                //     $sqlNotas="INSERT INTO notas VALUE(null, null, null, $ultimoID)";
+                //     $queryNotas=mysqli_query($c, $sqlNotas);
+                // }
+                // if(mysqli_affected_rows($sql)){
+                //         $_SESSION['mensaje'] = 'Agregado correctamente';
+                //         $_SESSION['tipo_mensaje'] = 'success';
+                //         // Header("location: inscripcion.php");
+                //  }else{
+                //         $_SESSION['mensaje'] = 'No se pudo cargar';
+                //         $_SESSION['tipo_mensaje'] = 'warning';
+                //         // Header("location: inscripcion.php");
+                //      }
+            }
+        ?>
 <?php include "footer.php" ?>

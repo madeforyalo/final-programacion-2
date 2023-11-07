@@ -48,6 +48,9 @@ insert into materias values (1, "Ingles I", 1),
 (23, "Practicas profesionalizantes III", 1);
 #inner join (materias) on materias.car_id = carreras.car_id;
 
+alter table alumnos add alu_dni int(9);
+select * from alumnos;
+ALTER TABLE `alumnos` ADD UNIQUE(`alu_dni`);
 create table alumnos(
 alu_id int auto_increment primary key,
 alu_nom varchar(50),
@@ -64,6 +67,9 @@ car_id tinyint,
 foreign key(car_id) references carreras(car_id),
 foreign key(alu_id) references alumnos(alu_id));
 
+delete from aluxmat where alu_id=1;
+select*from aluxmat;
+INSERT INTO aluxmat VALUE (null, 1, 2);
 create table aluxmat(
 aluxmat_id int auto_increment primary key,
 alu_id int,
@@ -72,6 +78,11 @@ foreign key(mat_id) references materias(mat_id),
 foreign key(alu_id) references alumnos(alu_id));
 
 drop table notas;
+ALTER TABLE `notas` ADD UNIQUE(`aluxmat_id`);
+
+select * From notas;
+delete from notas where aluxmat_id=3;
+
 create table notas(
 nota_id tinyint primary key auto_increment,
 nota_1 int (3),

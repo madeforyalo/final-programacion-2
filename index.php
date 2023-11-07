@@ -69,7 +69,7 @@ include "header.php";
                 </form>
             </div>
             <?php 
-                $bcr=todo();
+                $bcr=todoAlumnos();
 
                 if (isset($_GET['btnBuscar'])){
                     $bcr=buscar();
@@ -93,6 +93,7 @@ include "header.php";
                             </thead>
                             <tbody>
                                 <?php
+                                    if (mysqli_num_rows($bcr)> 0){
                                     while($registro=mysqli_fetch_array($bcr)){ //muestra las filas relacionadas con la posicion
                                 ?>
                                         <tr>
@@ -108,6 +109,9 @@ include "header.php";
                                         </tr>
                                 <?php
                                     }
+                                } else{
+                                    echo "No hay alumnos cargados";
+                                }
                                 ?>
                             </tbody>
                         </table>
