@@ -67,12 +67,13 @@ function loggin(){
 }
 function buscarAlum(){
     $mat_id = $_POST['materia'];
+    $alu_id = $_POST['alumno'];
     $c = conectar();
     $sql="SELECT notas.aluxmat_id, alumnos.alu_id, alumnos.alu_nom, alumnos.alu_ape, notas.nota_1, notas.nota_2, notas.nota_final
     FROM notas
     INNER JOIN aluxmat ON notas.aluxmat_id = aluxmat.aluxmat_id
     INNER JOIN alumnos ON aluxmat.alu_id = alumnos.alu_id
-    WHERE aluxmat.mat_id = $mat_id";
+    WHERE aluxmat.mat_id = $mat_id & aluxmat.alu_id = $alu_id";
     $query = mysqli_query($c, $sql);
     return $query;
 }
