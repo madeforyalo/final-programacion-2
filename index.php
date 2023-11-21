@@ -72,7 +72,7 @@ include "header.php";
                 $bcr=todoAlumnos();
 
                 if (isset($_GET['btnBuscar'])){
-                    $bcr=buscar();
+                    $bcr=buscarAlum();
                 }                               
             ?>
             <div class="col-12 col-sm-8">

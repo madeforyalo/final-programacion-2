@@ -30,7 +30,7 @@ function loggin(){
     $pass=$_POST['pass'];
 
     $sql="SELECT * FROM usuarios WHERE usu_usuario='$usuario'";
-    $query=mysqli_query($conn, $sql);
+    $query=mysqli_query($c, $sql);
     $registro = mysqli_fetch_assoc($query);
 
     if (mysqli_affected_rows($c)>0){
