@@ -61,7 +61,7 @@ include "header.php";
             <form id="combo" name="combo" action="" method="post">
                 <div>
                     <label for="carrera">Carrera:  </label>
-                    <select name="carrera" id="carrera">
+                    <select name="carrera" id="carrera" class="form-control buscador">
                         <option selected disabled value="0">Seleccione una Carrera...</option>
                         <?php 
                             $query=carrera();
@@ -81,7 +81,7 @@ include "header.php";
             ?>
             <div>
                 <label for="alumnos">Alumno: </label>
-                <select name="idalumnos" id="alumnos">
+                <select name="idalumnos" id="alumnos" class="form-control buscador">
                     <option value="0" selected disabled>seleccione un alumno...</option>
                     <?php
                     $query = alumnos();
