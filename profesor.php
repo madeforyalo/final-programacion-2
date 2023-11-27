@@ -114,6 +114,7 @@ $(document).ready(function() {
                     $busalum = buscarAlum();
                     if (mysqli_num_rows($busalum) > 0){
             ?>
+        <form action="actualizar_notas.php" method="post">
             <div style="padding: 10px;">
                 <input type="text" id="myInput" onkeyup="searchTable()" placeholder="Buscar..." style=" width: 300px">
             </div>    
@@ -121,6 +122,7 @@ $(document).ready(function() {
                         <table class="table shadow" id="myTable" >
                             <thead class="table-dark table-striped">
                                 <tr>
+                                    <th></th>
                                     <th>Nombre</th>
                                     <th>Apellido</th>
                                     <th>Primer parcial</th>
@@ -133,7 +135,8 @@ $(document).ready(function() {
                                 <?php
                                     while($registro=mysqli_fetch_assoc($busalum)){ //muestra las filas relacionadas con la posicion
                                 ?>
-                                        <tr data-aluxmat-id="<?php echo $registro['aluxmat_id']?>">
+                                        <tr data-aluxmat-id="<?php echo $registro['nota_id']?>">
+                                            <td><input type=radio name="alumno1" value="<?php echo $registro['nota_id']?>" required></td>
                                             <td><?php echo $registro['alu_nom']?></td>
                                             <td><?php echo $registro['alu_ape']?></td>
                                             <td><input type="number" name="parcial1" class="parcial1" value="<?php echo $registro['nota_1']?>"></td>                                            
@@ -147,8 +150,7 @@ $(document).ready(function() {
                                             <td><input type="number" name="final" class="final"  disabled></td>
                                             <?php 
                                             }else {?> <td><input type="number" name="final" class="final" value="<?php echo $registro['nota_final']?>"></td> <?php } ?>
-                                             <td><button class="cargar-nota">Cargar</button><!--<a href="#" id="enlace">cargar</a>--></td> 
-                                             
+                                             <td><button class="cargarNota">Cargar</button></td>
                                         </tr>
                                     <?php
                                         }
@@ -156,6 +158,7 @@ $(document).ready(function() {
                             </tbody>
                         </table>
                     </div>
+        </form>
                     <?php
                             }else{echo "No hay alumnos cargados para esta materia";}
                         }
