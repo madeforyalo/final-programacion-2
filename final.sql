@@ -156,3 +156,14 @@ SELECT notas.aluxmat_id, alumnos.alu_id, alumnos.alu_nom, alumnos.alu_ape, notas
     INNER JOIN aluxmat ON notas.aluxmat_id = aluxmat.aluxmat_id
     INNER JOIN alumnos ON aluxmat.alu_id = alumnos.alu_id
     WHERE aluxmat.mat_id = 4;
+    
+    SELECT alumnos.alu_nom, materias.mat_nom from aluxmat 
+	inner join alumnos on aluxmat.alu_id = alumnos.alu_id
+	inner join materias on aluxmat.mat_id = materias.mat_id
+        WHERE materias.mat_id = 1 
+        ORDER BY alu_nom ASC;
+        
+        SELECT notas.aluxmat_id, alumnos.alu_id, alumnos.alu_nom, alumnos.alu_ape, notas.nota_1, notas.nota_2, notas.nota_final
+    FROM notas
+    INNER JOIN aluxmat ON notas.aluxmat_id = aluxmat.aluxmat_id
+    INNER JOIN alumnos ON aluxmat.alu_id = alumnos.alu_id;

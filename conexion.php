@@ -67,7 +67,7 @@ function loggin(){
 }
 function buscarAlum(){
     $mat_id = $_POST['materia'];
-    $alu_id = $_POST['alumno'];
+    $alu_id = $_POST['alumnos'];
     $c = conectar();
     $sql="SELECT notas.aluxmat_id, alumnos.alu_id, alumnos.alu_nom, alumnos.alu_ape, notas.nota_1, notas.nota_2, notas.nota_final
     FROM notas

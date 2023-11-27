@@ -14,7 +14,7 @@
 	
 	while($rowA = mysqli_fetch_assoc($queryA))
 	{
-		$html.= "<option value='".$rowA['alu_id']."'>".$rowA['alu_nom']." ".$rowA['alu_ape']."</option>";
+		$html.= "<option value='".$rowA['alu_id']."'>".$rowA['alu_ape']." ".$rowA['alu_nom']."</option>";
 	}
 	
 	echo $html;
