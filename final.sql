@@ -48,30 +48,28 @@ insert into materias values (1, "Ingles I", 1),
 (23, "Practicas profesionalizantes III", 1);
 #inner join (materias) on materias.car_id = carreras.car_id;
 
-
+alter table alumnos add alu_dni int(9);
 select * from alumnos;
-
+ALTER TABLE `alumnos` ADD UNIQUE(`alu_dni`);
 create table alumnos(
 alu_id int auto_increment primary key,
 alu_nom varchar(50),
-alu_ape varchar(50),
-alu_dni int(9) unique
+alu_ape varchar(50)
+#alu_dni int(9),
 #alu_dir varchar(50),
 #alu_fecha date,
 #alu_tel int(15)
 );
+create table aluxcar(
+aluxcar_id int auto_increment primary key,
+alu_id int,
+car_id tinyint,
+foreign key(car_id) references carreras(car_id),
+foreign key(alu_id) references alumnos(alu_id));
 
-#create table aluxcar(
-#aluxcar_id int auto_increment primary key,
-#alu_id int,
-#car_id tinyint,
-#foreign key(car_id) references carreras(car_id),
-#foreign key(alu_id) references alumnos(alu_id));
-
-
-
+delete from aluxmat where alu_id=1;
+select*from aluxmat;
 INSERT INTO aluxmat VALUE (null, 1, 2);
-
 create table aluxmat(
 aluxmat_id int auto_increment primary key,
 alu_id int,
@@ -79,13 +77,30 @@ mat_id tinyint,
 foreign key(mat_id) references materias(mat_id),
 foreign key(alu_id) references alumnos(alu_id));
 
+drop table notas;
+ALTER TABLE `notas` ADD UNIQUE(`alu_id`);
+
+select * From notas;
+delete from notas where aluxmat_id=3;
+drop table notas;
+
 create table notas(
 nota_id tinyint primary key auto_increment,
 nota_1 int (3),
 nota_2 int (3),
 nota_final int (3),
-aluxmat_id int UNIQUE,
-foreign key(aluxmat_id) references aluxmat(aluxmat_id));
+alu_id int,
+mat_id tinyint,
+foreign key (alu_id) references alumnos(alu_id),
+foreign key (mat_id) references materias(mat_id));
+
+select * from notas;
+
+insert into notas value (null, 1, 1, null, 4, 4),
+						(null, 2, 2, null, 5, 4),
+                        (null, 3, 3, null, 2, 4),
+                        (null, 4, 4, null, 1, 4);
+
 
 UPDATE notas SET nota_1=7, nota_2=8, nota_final=4
             WHERE aluxmat_id = 4;
@@ -130,11 +145,11 @@ car_id tinyint,
 foreign key(prof_id) references profesores(prof_id),
 foreign key(car_id) references carreras(car_id));
 
-insert into alumnos values (null,"Gonzalo", "Rojas", 111111111),
-(null, "Fernando", "torres", 222222222),
-(null, "Luis", "Sbarbati", 333333333),
-(null, "Rodrigo", "Bombillar", 444444444),
-(null, "Dana", "More", 555555555);
+insert into alumnos values (null,"Gonzalo", "Rojas"),
+(null, "Fernando", "torres"),
+(null, "Luis", "Sbarbati"),
+(null, "Rodrigo", "Bombillar"),
+(null, "Dana", "More");
 
 insert into aluxmat values 
 (null, 1, 1), (null, 1, 2),(null, 1, 3), (null, 1, 4),
@@ -157,13 +172,25 @@ SELECT notas.aluxmat_id, alumnos.alu_id, alumnos.alu_nom, alumnos.alu_ape, notas
     INNER JOIN alumnos ON aluxmat.alu_id = alumnos.alu_id
     WHERE aluxmat.mat_id = 4;
     
-    SELECT alumnos.alu_nom, materias.mat_nom from aluxmat 
-	inner join alumnos on aluxmat.alu_id = alumnos.alu_id
-	inner join materias on aluxmat.mat_id = materias.mat_id
-        WHERE materias.mat_id = 1 
-        ORDER BY alu_nom ASC;
+    SELECT aluxmat_id, alumnos.alu_id, alumnos.alu_nom, alumnos.alu_ape FROM aluxmat 
+        inner join alumnos on aluxmat.alu_id = alumnos.alu_id
+        inner join materias on aluxmat.mat_id = materias.mat_id
+        WHERE materias.mat_id = 4 
+        ORDER BY alu_ape ASC;
         
-        SELECT notas.aluxmat_id, alumnos.alu_id, alumnos.alu_nom, alumnos.alu_ape, notas.nota_1, notas.nota_2, notas.nota_final
+        SELECT not_id, notas.mat_id, notas.alu_id, alumnos.alu_nom, alumnos.alu_ape, notas.nota_1, notas.nota_2, notas.nota_final
     FROM notas
-    INNER JOIN aluxmat ON notas.aluxmat_id = aluxmat.aluxmat_id
-    INNER JOIN alumnos ON aluxmat.alu_id = alumnos.alu_id;
+    #INNER JOIN aluxmat ON notas.aluxmat_id = aluxmat.aluxmat_id
+    INNER JOIN alumnos ON notas.alu_id = alumnos.alu_id
+    WHERE mat_id = 4 and notas.alu_id = 4;
+    
+   UPDATE notas SET nota_1=1, nota_2=1, nota_final=null
+                    WHERE alu_id=4 and mat_id = 4;
+                    
+	SELECT notas.mat_id, notas.alu_id, alumnos.alu_nom, alumnos.alu_ape, notas.nota_1, notas.nota_2, notas.nota_final
+    FROM notas
+    INNER JOIN alumnos ON notas.alu_id = alumnos.alu_id
+    INNER JOIN materias ON notas.mat_id = materias.mat_id
+    WHERE notas.mat_id = 4;
+    
+    select *, alumnos.alu_nom from notas INNER JOIN alumnos ON notas.alu_id = alumnos.alu_id;

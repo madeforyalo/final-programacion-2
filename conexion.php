@@ -67,12 +67,13 @@ function loggin(){
 }
 function buscarAlum(){
     $mat_id = $_POST['materia'];
-    $alu_id = $_POST['alumnos'];
+    #$alu_id = $_POST['alumnos'];
     $c = conectar();
-    $sql="SELECT notas.mat_id, notas.alu_id, alumnos.alu_nom, alumnos.alu_ape, notas.nota_1, notas.nota_2, notas.nota_final, notas.mat_id
+    $sql="SELECT nota_id, notas.mat_id, notas.alu_id, alumnos.alu_nom, alumnos.alu_ape, notas.nota_1, notas.nota_2, notas.nota_final
     FROM notas
     INNER JOIN alumnos ON notas.alu_id = alumnos.alu_id
-    WHERE mat_id = $mat_id and notas.alu_id = $alu_id";
+    INNER JOIN materias ON notas.mat_id = materias.mat_id
+    WHERE notas.mat_id = $mat_id";
     $query = mysqli_query($c, $sql);
     return $query;
 }
@@ -124,19 +125,28 @@ return $query;
 }
 
 function guardarNota(){
-    $alu_id = $_POST ['alumno'];
-    $mat_id = $_POST ['materia'];
-    $p1 = $_POST ['nota_1'];
-    $p2 = $_POST ['nota_2'];
-    $final = $_POST ['nota_final'];
+    #$notaID = $_POST['notaId'];
+    $alu_id = $_POST ['idAlumno'];
+    $mat_id = $_POST ['idMat'];
+    $p1 = $_POST ['parcial1'];
+    $p2 = $_POST ['parcial2'];
+    $final = $_POST ['final'];
+    if ($final == NULL){
+        $final = "NULL";
+    } 
+    require "conexion.php";
     $c = conectar();
-    $sql = "UPDATE notas SET nota_1=$p1, nota_2=$p2, nota_final=$final
-            WHERE alu_id = $alu_id and mat_id = $mat_id";
-    $query = mysqli_query($c, $sql);
-    return $query;
-    #$_SESSION['mensaje'] = 'Los datos fueron actualizados';
-    #$_SESSION['tipo_mensaje'] = 'warning';
-    #Header("location: profesor.php");
+    
+    $updateQuery = "UPDATE notas SET nota_1=$p1, nota_2=$p2, nota_final=$final
+                    WHERE alu_id = $alu_id AND mat_id = $mat_id";
+    $result = mysqli_query($c, $updateQuery);
+    if ($result) {
+        $_SESSION['mensaje'] = 'Los datos fueron actualizados';
+        $_SESSION['tipo_mensaje'] = 'success';
+    } else {
+        $_SESSION['mensaje'] = 'Error al actualizar las notas';
+        $_SESSION['tipo_mensaje'] = 'warning';
+    }
     
 }
 ?>
