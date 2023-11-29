@@ -7,7 +7,7 @@
         inner join alumnos on aluxmat.alu_id = alumnos.alu_id
         inner join materias on aluxmat.mat_id = materias.mat_id
         WHERE materias.mat_id = '$mat_id' 
-        ORDER BY alu_nom ASC";
+        ORDER BY alu_ape ASC";
 	$queryA = mysqli_query($c, $sql);
 	
 	$html= "<option value='0'>Seleccionar un Alumno...</option>";

@@ -69,11 +69,10 @@ function buscarAlum(){
     $mat_id = $_POST['materia'];
     $alu_id = $_POST['alumnos'];
     $c = conectar();
-    $sql="SELECT notas.aluxmat_id, alumnos.alu_id, alumnos.alu_nom, alumnos.alu_ape, notas.nota_1, notas.nota_2, notas.nota_final
+    $sql="SELECT notas.mat_id, notas.alu_id, alumnos.alu_nom, alumnos.alu_ape, notas.nota_1, notas.nota_2, notas.nota_final, notas.mat_id
     FROM notas
-    INNER JOIN aluxmat ON notas.aluxmat_id = aluxmat.aluxmat_id
-    INNER JOIN alumnos ON aluxmat.alu_id = alumnos.alu_id
-    WHERE aluxmat.mat_id = $mat_id & aluxmat.alu_id = $alu_id";
+    INNER JOIN alumnos ON notas.alu_id = alumnos.alu_id
+    WHERE mat_id = $mat_id and notas.alu_id = $alu_id";
     $query = mysqli_query($c, $sql);
     return $query;
 }
@@ -125,13 +124,14 @@ return $query;
 }
 
 function guardarNota(){
-    $aluxmat = $_POST ['aluxmat_id'];
+    $alu_id = $_POST ['alumno'];
+    $mat_id = $_POST ['materia'];
     $p1 = $_POST ['nota_1'];
     $p2 = $_POST ['nota_2'];
     $final = $_POST ['nota_final'];
     $c = conectar();
     $sql = "UPDATE notas SET nota_1=$p1, nota_2=$p2, nota_final=$final
-            WHERE aluxmat_id = $aluxmat";
+            WHERE alu_id = $alu_id and mat_id = $mat_id";
     $query = mysqli_query($c, $sql);
     return $query;
     #$_SESSION['mensaje'] = 'Los datos fueron actualizados';

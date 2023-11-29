@@ -114,7 +114,8 @@ $(document).ready(function() {
                     $busalum = buscarAlum();
                     if (mysqli_num_rows($busalum) > 0){
             ?>
-                        <div>
+                    <form action="actualizar_notas.php" method="post">
+            <div>
                             <select name="alumnos" id="alumnos">
                                 <?php
                                     while($registro=mysqli_fetch_assoc($busalum)){
@@ -132,6 +133,7 @@ $(document).ready(function() {
                         <table class="table shadow" id="myTable" >
                             <thead class="table-dark table-striped">
                                 <tr>
+                                    <th></th>
                                     <th>Nombre</th>
                                     <th>Apellido</th>
                                     <th>Primer parcial</th>
@@ -142,34 +144,35 @@ $(document).ready(function() {
                             </thead>
                             <tbody>
                                 //<?php
-                                 //   while($registro=mysqli_fetch_assoc($busalum)){ //muestra las filas relacionadas con la posicion
+                                    while($registro=mysqli_fetch_assoc($busalum)){ //muestra las filas relacionadas con la posicion
                                 ?>
-                                        <tr data-aluxmat-id="// <?php // echo $registro['aluxmat_id']?>">
-                                            <td><?php //echo $registro['alu_nom']?></td>
-                                            <td><?php //echo $registro['alu_ape']?></td>
-                                            <td><input type="number" name="parcial1" class="parcial1" value="<?php //echo $registro['nota_1']?>"></td>                                            
-                                            <td><input type="number" name="parcial2" class="parcial2" value="<?php // echo $registro['nota_2']?>"></td>
+                                        <tr data-aluxmat-id="<?php echo $registro['nota_id']?>">
+                                            <td><input type=radio name="alumno1" value="<?php echo $registro['nota_id']?>" required></td>
+                                            <td><?php echo $registro['alu_nom']?></td>
+                                            <td><?php echo $registro['alu_ape']?></td>
+                                            <td><input type="number" name="parcial1" class="parcial1" value="<?php echo $registro['nota_1']?>"></td>                                            
+                                            <td><input type="number" name="parcial2" class="parcial2" value="<?php echo $registro['nota_2']?>"></td>
                                             <?php
-                                            //$p1 = $registro['nota_1'];
-                                            //$p2 = $registro['nota_2'];
-                                            //$f = ($p1 + $p2)/2;
-                                            //if ($f < 4) {
+                                            $p1 = $registro['nota_1'];
+                                            $p2 = $registro['nota_2'];
+                                            $f = ($p1 + $p2)/2;
+                                            if ($f < 4) {
                                             ?>                                            
                                             <td><input type="number" name="final" class="final"  disabled></td>
                                             <?php 
-                                            }else {?> <td><input type="number" name="final" class="final" value="<?php // echo $registro['nota_final']?>"></td> <?php } ?>
-                                             <td><button class="cargar-nota">Cargar</button><a href="#" id="enlace">cargar</a></td> 
-                                             
+                                            }else {?> <td><input type="number" name="final" class="final" value="<?php echo $registro['nota_final']?>"></td> <?php } ?>
+                                             <td><button class="cargarNota">Cargar</button></td>
                                         </tr>
                                     <?php
-                                        //}
+                                        }
                                     ?>
                             </tbody>
                         </table>
-                    </div> -->
+                    </div>
+        </form>
                     <?php
                             }else{echo "No hay alumnos cargados para esta materia";}
-                       // }
+                        }
                     ?>
 
 </main>
