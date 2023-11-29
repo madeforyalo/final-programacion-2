@@ -124,6 +124,18 @@ $query = mysqli_query($c, $sql);
 return $query;
 }
 
+function notas(){
+    $alu_usu = $_POST ['usuarioAlumno'];
+    $c = conectar();
+    $sql = "SELECT materias.mat_nom, nota_1, nota_2, nota_final
+            FROM notas 
+            INNER JOIN materias ON notas.mat_id = materias.mat_id
+            JOIN alumnos ON notas.alu_id = alumnos.alu_id
+            WHERE usu_usuario = '$alu_usu'";
+    $query = mysqli_query($c, $sql);
+    return $query;
+}
+
 // function guardarNota(){
 //     #$notaID = $_POST['notaId'];
 //     $alu_id = $_POST ['idAlumno'];

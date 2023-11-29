@@ -1,5 +1,14 @@
 <?php
 require "conexion.php"; 
+if(isset($_SESSION['id']) && $_SESSION['tipoUsuario']==3 || $_SESSION['tipoUsuario']==1){
+//todo ok
+$usuario = $_SESSION['nombre'];
+}
+else{
+    echo"Pagina Prohibida. Inicie Sesion";
+    echo "<br><br><h2><a href=index.php><button class='btn btn-info'>Iniciar sesion</button></a></h2>";
+    exit();
+}
 $c = conectar();
 $sql = "SELECT car_id, car_desc FROM carreras ORDER BY car_desc ASC";
 $query = mysqli_query($c, $sql);                 

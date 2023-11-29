@@ -12,5 +12,6 @@ include "header.php";
 <a href="agregar_profesor.php">Agregar Profesor</a>
 <a href="#">Agregar Materia</a>
 <a href="#">Agregar Carrera</a>
+<a href="loggout.php">Cerrar sesión</a>
 
 <?php include "footer.php" ?>
