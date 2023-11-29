@@ -1,4 +1,5 @@
 <?php
+session_start();
 if (isset($_POST['notaId'])) {
     $notaID = $_POST['notaId'];
     $alu_id = $_POST ['idAlumno'];
@@ -19,9 +20,13 @@ if (isset($_POST['notaId'])) {
                     WHERE alu_id = $alu_id AND mat_id = $mat_id";
     $result = mysqli_query($c, $updateQuery);
     if ($result) {
+        $_SESSION['mensaje'] = 'Los datos fueron actualizados';
+        $_SESSION['tipo_mensaje'] = 'success';
         Header("location: profesor.php");
     } else {
-            echo "Error al actualizar las notas";
+        $_SESSION['mensaje'] = 'Error al actualizar las notas';
+        $_SESSION['tipo_mensaje'] = 'warning';
+        Header("location: profesor.php");
     }
 }
 ?>

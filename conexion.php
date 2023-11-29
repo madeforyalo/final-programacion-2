@@ -124,29 +124,29 @@ $query = mysqli_query($c, $sql);
 return $query;
 }
 
-function guardarNota(){
-    #$notaID = $_POST['notaId'];
-    $alu_id = $_POST ['idAlumno'];
-    $mat_id = $_POST ['idMat'];
-    $p1 = $_POST ['parcial1'];
-    $p2 = $_POST ['parcial2'];
-    $final = $_POST ['final'];
-    if ($final == NULL){
-        $final = "NULL";
-    } 
-    require "conexion.php";
-    $c = conectar();
+// function guardarNota(){
+//     #$notaID = $_POST['notaId'];
+//     $alu_id = $_POST ['idAlumno'];
+//     $mat_id = $_POST ['idMat'];
+//     $p1 = $_POST ['parcial1'];
+//     $p2 = $_POST ['parcial2'];
+//     $final = $_POST ['final'];
+//     if ($final == NULL){
+//         $final = "NULL";
+//     } 
+//     require "conexion.php";
+//     $c = conectar();
     
-    $updateQuery = "UPDATE notas SET nota_1=$p1, nota_2=$p2, nota_final=$final
-                    WHERE alu_id = $alu_id AND mat_id = $mat_id";
-    $result = mysqli_query($c, $updateQuery);
-    if ($result) {
-        $_SESSION['mensaje'] = 'Los datos fueron actualizados';
-        $_SESSION['tipo_mensaje'] = 'success';
-    } else {
-        $_SESSION['mensaje'] = 'Error al actualizar las notas';
-        $_SESSION['tipo_mensaje'] = 'warning';
-    }
+//     $updateQuery = "UPDATE notas SET nota_1=$p1, nota_2=$p2, nota_final=$final
+//                     WHERE alu_id = $alu_id AND mat_id = $mat_id";
+//     $result = mysqli_query($c, $updateQuery);
+//     if ($result) {
+//         $_SESSION['mensaje'] = 'Los datos fueron actualizados';
+//         $_SESSION['tipo_mensaje'] = 'success';
+//     } else {
+//         $_SESSION['mensaje'] = 'Error al actualizar las notas';
+//         $_SESSION['tipo_mensaje'] = 'warning';
+//     }
     
-}
+// }
 ?>

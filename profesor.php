@@ -87,9 +87,19 @@ $(document).ready(function() {
 <body id="fondo">
     <main class="m-3">
         <div class="row">
+        <div class="row">
             <div class="col-12 col-sm-4 pt-1 pb-3">
                 <h1>Cargar notas</h1>
             </div>
+            <div class="col-sm-8">
+            <?php if(isset($_SESSION['mensaje'])){ ?>
+                <div class="alert alert-<?= $_SESSION['tipo_mensaje']; ?> alert-dismissible fade show" role="alert">
+                    <?= $_SESSION['mensaje'] ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <?php session_unset();} ?>
+            </div>
+        </div>
         <form id="combo" name="combo" action="" method="post">
                 <div>
                     <label for="carrera">Carrera:  </label>
