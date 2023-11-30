@@ -78,18 +78,30 @@ function buscarAlum(){
     return $query;
 }
 
-function update(){
+function updateAlumno(){
     $conn=conectar();
     $matricula=$_POST ['txtMatricula'];
     $nombre=$_POST ['txtNombre'];
     $apellido=$_POST ['txtapellido'];
-    $dni=$_POST ['txtdni'];
-    $fechaDeNac=$_POST ['txtFecha'];
-    $direccion=$_POST ['txtDireccion'];
-    $tel=$_POST ['txtTelefono'];
+    $usuario=$_POST ['txtUsuario'];
 
-    $sql="UPDATE alumnos SET alu_nom='$nombre', alu_ape='$apellido', alu_dni=$dni, alu_dir='$direccion', alu_fecha='$fechaDeNac', alu_tel=$tel
+    $sql="UPDATE alumnos SET alu_nom='$nombre', alu_ape='$apellido', usu_usuario='$usuario'
     WHERE alu_id='$matricula';";
+
+    $query = mysqli_query($conn, $sql);
+    return $query;
+}
+
+function updateUsuario(){
+    $conn=conectar();
+    $nombre=$_POST ['txtNombre'];
+    $apellido=$_POST ['txtapellido'];
+    $usuario=$_POST ['txtUsuario'];
+    // $pass = $_POST ['txtpass'];
+    $usu = $_POST ['txtusu'];
+
+    $sql="UPDATE usuarios SET usu_nombre='$nombre', usu_apellido='$apellido', usu_usuario='$usuario'
+    WHERE usu_usuario='$usu';";
 
     $query = mysqli_query($conn, $sql);
     return $query;

@@ -4,6 +4,18 @@ require "conexion.php";
 
 $actualizar=actualizar();
 
+if(isset($_SESSION['id']) && $_SESSION['tipoUsuario']==1){
+    //todo ok
+    $usuario = $_SESSION['usuario'];
+    $nombre = $_SESSION['nombre'];
+    $apellido = $_SESSION['apellido'];
+    }
+    else{
+        echo"Pagina Prohibida. Inicie Sesion";
+        echo "<br><br><h2><a href=index.php><button class='btn btn-info'>Iniciar sesion</button></a></h2>";
+        exit();
+    }
+
 include "header.php"
 ?>
 
@@ -14,6 +26,11 @@ include "header.php"
         <div class="row">
             <div class="col-12 col-sm-4 pt-1 pb-3">
                 <h1>Editar Alumno</h1>
+                <br>
+                <h3><?php echo $apellido; ?>, <?php echo $nombre; ?></h3>
+                <a href="loggout.php">Cerrar sesión</a>
+
+                <br><br>
             </div>
             <div class="row">
                 <div class="col-12 col-sm-4" style="margin-left: 5%;">
@@ -35,33 +52,30 @@ include "header.php"
                             </div>
                             
                             <div class="pb-3">
-                                <input type="text" name="txtdni" id="txtdni" placeholder="<?php echo $resulset[3]?>"
-                                 class="form-control shadow" title="DNI" value="<?php echo $resulset[3]?>" required >
+                                <input type="text" name="txtUsuario" id="txtUsuario" placeholder="<?php echo $resulset[3]?>"
+                                 class="form-control shadow" title="Usuario" value="<?php echo $resulset[3]?>" required >
                             </div>
-                            <div class="pb-3">
-                                <input type="text" name="txtDireccion" id="txtDireccion" placeholder="<?php echo $resulset[4]?>"
-                                    class="form-control shadow" title="Dirección" value="<?php echo $resulset[4]?>" required >
-                            </div>
-                            <div class="pb-3">
-                                <input type="date" name="txtFecha" id="txtFecha" placeholder="<?php echo $resulset[5]?>"
-                                    class="form-control shadow" title="Fecha de nacimiento" value="<?php echo $resulset[5]?>" required >
-                            </div>
-                            <div class="pb-3">
-                                <input type="tel" name="txtTelefono" id="txtTelefono" placeholder="<?php echo $resulset[6]?>"
-                                    class="form-control shadow" title="Telefono" value="<?php echo $resulset[6]?>" >
-                            </div>
+                            <!-- <div class="pb-3">
+                                <input type="password" name="txtpass" id="txtpass" placeholder="<?php echo $resulset[4]?>"
+                                    class="form-control shadow" title="Contraseña" value="<?php echo $resulset[4]?>" required >
+                            </div> -->
+                            <input type="text" name="txtusu" id="txtusu" placeholder="<?php echo $resulset[3]?>" hidden>
+                            
+                        
+                         
                         <?php ;} ?>
                         <div>
                             <button type="submit" id="btnActualizar" name="btnActualizar" class="btn btn-primary">Actualizar</button>
-                            <a class="btn btn-primary" href="index.php" role="button">Volver</a>
+                            <a class="btn btn-primary" href="agregarAlumno.php" role="button">Volver</a>
                         </div>
                         <?php
                             
                             if (isset($_POST['btnActualizar'])){
-                                update();
+                                updateUsuario();
+                                updateAlumno();
                                 $_SESSION['mensaje'] = 'Los datos fueron actualizados';
                                 $_SESSION['tipo_mensaje'] = 'warning';
-                                Header("location: index.php");
+                                Header("location: agregarAlumno.php");
                             }
                         ?>
                     </form>                        

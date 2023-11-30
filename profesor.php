@@ -1,8 +1,9 @@
 <?php
 require "conexion.php"; 
 if(isset($_SESSION['id']) && $_SESSION['tipoUsuario']==3 || $_SESSION['tipoUsuario']==1){
-//todo ok
-$usuario = $_SESSION['nombre'];
+    $usuario = $_SESSION['usuario'];
+    $nombre = $_SESSION['nombre'];
+    $apellido = $_SESSION['apellido'];
 }
 else{
     echo"Pagina Prohibida. Inicie Sesion";
@@ -19,8 +20,6 @@ include "header.php";
 <script language="javascript">
     $(document).ready(function(){
         $("#carrera").change(function () {
-
-            // $('#alumnos').find('option').remove().end().append('<option value="whatever"></option>').val('whatever');
             
             $("#carrera option:selected").each(function () {
                 car_id = $(this).val();
@@ -46,49 +45,12 @@ include "header.php";
         $("#materia").change(function () {
             $("#materia option:selected").each(function () {
                 mat_id = $(this).val();
-                $.post("conexion.php", { mat_id: mat_id }, //function(data){
-                   // $("#alumnos").html(data);
+                $.post("conexion.php", { mat_id: mat_id }
             );                        
             });
         })
     });
 </script>
-<!-- <script>
-$(document).ready(function() {
-  $(".cargar-nota").click(function() {
-    var row = $(this).closest("tr");
-    var aluxmat_id = row.data("aluxmat-id");
-    var parcial1 = row.find(".parcial1").val();
-    var parcial2 = row.find(".parcial2").val();
-    var final = row.find(".final").val();
-
-    console.log("aluxmat_id:", aluxmat_id);
-    console.log("parcial1:", parcial1);
-    console.log("parcial2:", parcial2);
-    console.log("final:", final);
-
-    $.ajax({
-      method: "POST",
-      url: "actualizar_notas.php",
-      data: {
-        aluxmat_id: aluxmat_id,
-        parcial1: parcial1,
-        parcial2: parcial2,
-        final: final
-      },
-      success: function(response) {
-        // Manejar la respuesta, por ejemplo, mostrar un mensaje de éxito
-        alert("Notas actualizadas correctamente");
-      },
-      error: function() {
-        alert("Error al actualizar las notas");
-      }
-    });
-  });
-});
-</script> -->
-
-
 
     <title>Notas</title>
 </head>
@@ -99,6 +61,9 @@ $(document).ready(function() {
         <div class="row">
             <div class="col-12 col-sm-4 pt-1 pb-3">
                 <h1>Cargar notas</h1>
+                <br>
+                <h3><?php echo $apellido; ?>, <?php echo $nombre; ?></h3>
+                <a href="loggout.php">Cerrar sesión</a>
             </div>
             <div class="col-sm-8">
             <?php if(isset($_SESSION['mensaje'])){ ?>
@@ -135,7 +100,7 @@ $(document).ready(function() {
             ?>
 
                         <div style="padding: 10px;">
-                            <input type="text" id="myInput" onkeyup="searchTable()" placeholder="Buscar..." style=" width: 300px">
+                            <input type="text" id="myInput" onkeyup="searchTable()" placeholder="Buscar..." style=" width: 300px" class="form-control shadow">
                         </div>    
                             <div class="table" style="overflow: auto;">
                                     <table class="table shadow" id="myTable" >

@@ -6,7 +6,7 @@ $mat_id = $_GET['mat'];
 $sql="INSERT INTO aluxmat VALUE (null, '$alu_id', '$mat_id');";
 $query=mysqli_query($c, $sql);
 
-if(mysqli_affected_rows($sql)){
+if($query){
         $_SESSION['mensaje'] = 'Agregado correctamente';
         $_SESSION['tipo_mensaje'] = 'success';
         Header("location: inscripcion.php");
