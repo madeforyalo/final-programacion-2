@@ -26,7 +26,7 @@ include "header.php";
                 <br>
                 <br>
 
-<a href="agregarAlumnos.php">Agregar Alumnos</a>
+<a href="agregarAlumno.php">Agregar Alumnos</a>
 <br>
 <br>
 <a href="inscripcion.php">Inscripcion</a>
