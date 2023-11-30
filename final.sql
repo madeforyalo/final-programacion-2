@@ -1,11 +1,12 @@
 create database final;
 use final;
 
+drop table roles;
 create table roles(
 rol_id tinyint primary key,
 rol_desc varchar(13));
 
-insert into roles values (1, "SuperAdmin"), (2, "Admin"), (3, "Profesor");
+insert into roles values (1, "Admin"), (2, "Directivo"), (3, "Profesor"), (4, "Alumno");
 
 create table carreras(
 car_id tinyint primary key,
@@ -21,7 +22,6 @@ mat_nom varchar (50),
 car_id tinyint,
 foreign key(car_id) references carreras(car_id));
 
-SELECT mat_id, mat_nom FROM materias WHERE car_id = '1' ORDER BY mat_nom ASC;
 
 insert into materias values (1, "Ingles I", 1), 
 (2, "Ciencia Tecnologia y sociedad", 1),
@@ -46,30 +46,32 @@ insert into materias values (1, "Ingles I", 1),
 (21, "Ingenieria de sofware II", 1),
 (22, "Algoritmos y estructura de datos III", 1),
 (23, "Practicas profesionalizantes III", 1);
-#inner join (materias) on materias.car_id = carreras.car_id;
 
-alter table alumnos add alu_dni int(9);
+
 select * from alumnos;
-ALTER TABLE `alumnos` ADD UNIQUE(`alu_dni`);
+drop table alumnos;
+
 create table alumnos(
 alu_id int auto_increment primary key,
 alu_nom varchar(50),
-alu_ape varchar(50)
-#alu_dni int(9),
-#alu_dir varchar(50),
-#alu_fecha date,
-#alu_tel int(15)
-);
-create table aluxcar(
-aluxcar_id int auto_increment primary key,
-alu_id int,
-car_id tinyint,
-foreign key(car_id) references carreras(car_id),
-foreign key(alu_id) references alumnos(alu_id));
+alu_ape varchar(50),
+usu_usuario varchar (20) UNIQUE,
+rol_id tinyint,
+foreign key (usu_usuario) references usuarios(usu_usuario),
+foreign key (rol_id) references roles(rol_id));
+
+insert into alumnos values (null,"Sofia", "peralta", "speralta", 4),
+(null, "Fernando", "torres", "ftorres", 4),
+(null, "Alen", "Ozcariz", "aozcariz", 4),
+(null, "Celeste", "Diaz", "cdiaz", 4),
+(null, "Dana", "More", "dmore", 4);
+
 
 delete from aluxmat where alu_id=1;
 select*from aluxmat;
 INSERT INTO aluxmat VALUE (null, 1, 2);
+drop table aluxmat;
+
 create table aluxmat(
 aluxmat_id int auto_increment primary key,
 alu_id int,
@@ -77,11 +79,15 @@ mat_id tinyint,
 foreign key(mat_id) references materias(mat_id),
 foreign key(alu_id) references alumnos(alu_id));
 
-drop table notas;
-ALTER TABLE `notas` ADD UNIQUE(`alu_id`);
+insert into aluxmat values 
+(null, 6, 1), (null, 6, 2),(null, 6, 3), (null, 6, 4),
+(null, 7, 1), (null, 7, 2),(null, 7, 3), (null, 7, 4),
+(null, 8, 1), (null, 8, 3),(null, 8, 5), (null, 8, 7),
+(null, 9, 2), (null, 9, 4),(null, 9, 6), (null, 9, 8),
+(null, 10, 4), (null, 10, 5),(null, 10, 6), (null, 10, 7);
+
 
 select * From notas;
-delete from notas where aluxmat_id=3;
 drop table notas;
 
 create table notas(
@@ -94,43 +100,33 @@ mat_id tinyint,
 foreign key (alu_id) references alumnos(alu_id),
 foreign key (mat_id) references materias(mat_id));
 
-select * from notas;
+insert into notas value (null, 1, 1, null, 6, 4),
+						(null, 2, 2, null, 7, 4),
+                        (null, 3, 3, null, 8, 4),
+                        (null, 4, 4, null, 9, 4),
+                        (null, 4, 4, null, 10, 4);
 
-insert into notas value (null, 1, 1, null, 4, 4),
-						(null, 2, 2, null, 5, 4),
-                        (null, 3, 3, null, 2, 4),
-                        (null, 4, 4, null, 1, 4);
-
-
-UPDATE notas SET nota_1=7, nota_2=8, nota_final=4
-            WHERE aluxmat_id = 4;
-select * from aluxmat;
-insert into notas values (null, 5, 6, null, 4);
-insert into notas (nota_1, nota_2) values (7, 7);
-#create table notxaluxmat (
-#notxaluxmat tinyint auto_increment primary key,
-#nota_id tinyint,
-#alu_id int,
-#mat_id tinyint,
-#foreign key(mat_id) references materias(mat_id),
-#foreign key(alu_id) references alumnos(alu_id),
-#foreign key(nota_id) references notas(nota_id));
-
-SELECT alu_nom, alu_ape, nota_1, nota_2 from notas 
-    inner join alumnos on notas.alu_id = alumnos.alu_id
-    inner join materias on notas.mat_id = materias.mat_id
-    #inner join notas on notxaluxmat.nota_id = notas.nota_id
-    WHERE materias.mat_id = 1;
-
-
+select * from usuarios;
+drop table usuarios;
 create table usuarios(
 usu_id int primary key auto_increment,
 usu_nombre varchar (20),
 usu_apellido varchar(20),
-usu_usuario varchar (20),
+usu_usuario varchar (20) UNIQUE,
 usu_contra varchar (20),
 rol_id tinyint,
 foreign key(rol_id) references roles(rol_id));
+
+insert into usuarios values (null, "Gonzalo", "Rojas", "grojas", "1234", 1),
+							(null, "Matias", "Vicente", "mvicente", "1234", 2),
+                            (null, "Paula", "Giaimo", "pgiaimo", "1234", 3),
+                            (null, "Sofia", "Peralta", "speralta", "1234", 4);
+                            
+insert into usuarios values 
+	(null, "Fernando", "Torres", "ftorres", "1234", 4),
+	(null, "Alen", "Ozcariz", "aozcariz", "1234", 4),
+	(null, "Celeste", "Diaz", "cdiaz", "1234", 4),
+	(null, "Dana", "More", "dmore", "1234", 4);
 
 create table profesores(
 prof_id int auto_increment primary key,
@@ -138,59 +134,4 @@ prof_nom varchar(50),
 prof_ape varchar(50),
 prof_dni int(10));
 
-create table profxcarr (
-pxc_id int auto_increment primary key,
-prof_id int,
-car_id tinyint,
-foreign key(prof_id) references profesores(prof_id),
-foreign key(car_id) references carreras(car_id));
 
-insert into alumnos values (null,"Gonzalo", "Rojas"),
-(null, "Fernando", "torres"),
-(null, "Luis", "Sbarbati"),
-(null, "Rodrigo", "Bombillar"),
-(null, "Dana", "More");
-
-insert into aluxmat values 
-(null, 1, 1), (null, 1, 2),(null, 1, 3), (null, 1, 4),
-(null, 2, 1), (null, 2, 2),(null, 2, 3), (null, 2, 4),
-(null, 3, 1), (null, 3, 3),(null, 3, 5), (null, 3, 7),
-(null, 4, 2), (null, 4, 4),(null, 4, 6), (null, 4, 8),
-(null, 5, 4), (null, 5, 5),(null, 5, 6), (null, 5, 7);
-
-select alumnos.alu_nom, materias.mat_nom from aluxmat 
-inner join alumnos on aluxmat.alu_id = alumnos.alu_id
-inner join materias on aluxmat.mat_id = materias.mat_id;
-
-SELECT alu_nom, alu_ape from aluxmat 
-inner join alumnos on aluxmat.alu_id = alumnos.alu_id
-WHERE mat_id = 1;
-
-SELECT notas.aluxmat_id, alumnos.alu_id, alumnos.alu_nom, alumnos.alu_ape, notas.nota_1, notas.nota_2, notas.nota_final
-    FROM notas
-    INNER JOIN aluxmat ON notas.aluxmat_id = aluxmat.aluxmat_id
-    INNER JOIN alumnos ON aluxmat.alu_id = alumnos.alu_id
-    WHERE aluxmat.mat_id = 4;
-    
-    SELECT aluxmat_id, alumnos.alu_id, alumnos.alu_nom, alumnos.alu_ape FROM aluxmat 
-        inner join alumnos on aluxmat.alu_id = alumnos.alu_id
-        inner join materias on aluxmat.mat_id = materias.mat_id
-        WHERE materias.mat_id = 4 
-        ORDER BY alu_ape ASC;
-        
-        SELECT not_id, notas.mat_id, notas.alu_id, alumnos.alu_nom, alumnos.alu_ape, notas.nota_1, notas.nota_2, notas.nota_final
-    FROM notas
-    #INNER JOIN aluxmat ON notas.aluxmat_id = aluxmat.aluxmat_id
-    INNER JOIN alumnos ON notas.alu_id = alumnos.alu_id
-    WHERE mat_id = 4 and notas.alu_id = 4;
-    
-   UPDATE notas SET nota_1=1, nota_2=1, nota_final=null
-                    WHERE alu_id=4 and mat_id = 4;
-                    
-	SELECT notas.mat_id, notas.alu_id, alumnos.alu_nom, alumnos.alu_ape, notas.nota_1, notas.nota_2, notas.nota_final
-    FROM notas
-    INNER JOIN alumnos ON notas.alu_id = alumnos.alu_id
-    INNER JOIN materias ON notas.mat_id = materias.mat_id
-    WHERE notas.mat_id = 4;
-    
-    select *, alumnos.alu_nom from notas INNER JOIN alumnos ON notas.alu_id = alumnos.alu_id;
