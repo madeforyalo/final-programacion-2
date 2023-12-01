@@ -92,12 +92,25 @@ function updateAlumno(){
     return $query;
 }
 
+function updateProf(){
+    $conn=conectar();
+    $matricula=$_POST ['txtMatricula'];
+    $nombre=$_POST ['txtNombre'];
+    $apellido=$_POST ['txtapellido'];
+    $usuario=$_POST ['txtUsuario'];
+
+    $sql="UPDATE profesores SET prof_nom='$nombre', prof_ape='$apellido', usu_usuario='$usuario'
+    WHERE prof_id='$matricula';";
+
+    $query = mysqli_query($conn, $sql);
+    return $query;
+}
+
 function updateUsuario(){
     $conn=conectar();
     $nombre=$_POST ['txtNombre'];
     $apellido=$_POST ['txtapellido'];
     $usuario=$_POST ['txtUsuario'];
-    // $pass = $_POST ['txtpass'];
     $usu = $_POST ['txtusu'];
 
     $sql="UPDATE usuarios SET usu_nombre='$nombre', usu_apellido='$apellido', usu_usuario='$usuario'
@@ -107,10 +120,19 @@ function updateUsuario(){
     return $query;
 }
 
+
 function actualizar(){
     $conn=conectar();
     $id_matricula=$_GET['id'];
     $sql="SELECT * FROM alumnos WHERE alu_id='$id_matricula';";
+    $query=mysqli_query($conn, $sql);
+    return $query;
+}
+
+function actualizarProf(){
+    $conn=conectar();
+    $id_matricula=$_GET['id'];
+    $sql="SELECT * FROM profesores WHERE prof_id='$id_matricula';";
     $query=mysqli_query($conn, $sql);
     return $query;
 }

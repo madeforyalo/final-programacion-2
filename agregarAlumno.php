@@ -21,6 +21,11 @@ include "header.php";
         <div class="row">
             <div class="col-12 col-sm-4 pt-1 pb-3">
                 <h1>Agregar Alumno</h1>
+                <br>
+                <h3><?php echo $apellido; ?>, <?php echo $nombre; ?></h3>
+                <a href="loggout.php">Cerrar sesión</a>
+
+                <br><br>
             </div>
             <div class="col-sm-8">
             <?php if(isset($_SESSION['mensaje'])){ ?>

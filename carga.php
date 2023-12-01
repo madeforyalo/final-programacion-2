@@ -5,8 +5,6 @@ $nombre=$_POST ['txtNombre'];
 $apellido=$_POST ['txtapellido'];
 $usuario=$_POST ['txtUsuario'];
 $pass=$_POST ['txtPass'];
-// $direccion=$_POST ['txtDireccion'];
-// $tel=$_POST ['txtTelefono'];
 
 $sql="SELECT * FROM alumnos WHERE usu_usuario = '$usuario'";
 $query=mysqli_query($conn,$sql);
