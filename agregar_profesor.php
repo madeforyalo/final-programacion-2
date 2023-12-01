@@ -66,7 +66,7 @@ include "header.php";
             </div>
             <?php 
                 $bcr=todoProf();
-                           
+            if (mysqli_num_rows($bcr)> 0){         
             ?>
             <div class="col-12 col-sm-8">
                 <div style="padding: 10px;">
@@ -85,7 +85,7 @@ include "header.php";
                             </thead>
                             <tbody id="myTable">
                                 <?php
-                                    if (mysqli_num_rows($bcr)> 0){
+                                    
                                     while($registro=mysqli_fetch_array($bcr)){ //muestra las filas relacionadas con la posicion
                                 ?>
                                         <tr>
