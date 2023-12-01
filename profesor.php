@@ -71,7 +71,7 @@ include "header.php";
                     <?= $_SESSION['mensaje'] ?>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-                <?php session_unset();} ?>
+                <?php unset($_SESSION['mensaje'], $_SESSION['tipo_mensaje']);} ?>
             </div>
         </div>
         <form id="combo" name="combo" action="" method="post">
