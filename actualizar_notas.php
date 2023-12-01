@@ -7,6 +7,14 @@ if (isset($_POST['notaId'])) {
     $p1 = $_POST ['parcial1'];
     $p2 = $_POST ['parcial2'];
     $final = $_POST ['final'];
+    if ($p1 == NULL){
+        $p1 = "NULL";
+    } 
+
+    if ($p2 == NULL){
+        $p2 = "NULL";
+    } 
+
     if ($final == NULL){
         $final = "NULL";
     } 
