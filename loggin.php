@@ -1,6 +1,6 @@
 <?php
-  $usuario=$_GET['usuario'];
-  $contra=$_GET['pass'];
+  $usuario=$_POST['usuario'];
+  $contra=$_POST['pass'];
 
   require "conexion.php";
   $conn=conectar();

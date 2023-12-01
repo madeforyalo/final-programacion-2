@@ -36,12 +36,12 @@ include "header.php";
 <a href="agregar_profesor.php">ABM Profesor</a>
 <br>
 <br>
-
+<!-- 
 <a href="#">Agregar Materia</a>
 <br>
 <br>
 
-<a href="#">Agregar Carrera</a>
+<a href="#">Agregar Carrera</a> -->
 
 
 <?php include "footer.php" ?>
