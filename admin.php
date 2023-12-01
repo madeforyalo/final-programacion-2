@@ -42,9 +42,6 @@ include "header.php";
 <br>
 
 <a href="#">Agregar Carrera</a>
-<br>
-<br>
 
-<a href="loggout.php">Cerrar sesión</a>
 
 <?php include "footer.php" ?>
