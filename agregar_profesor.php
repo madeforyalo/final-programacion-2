@@ -35,7 +35,7 @@ include "header.php";
                     <?= $_SESSION['mensaje'] ?>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-                <?php session_unset();} ?>
+                <?php } ?>
             </div>
         </div>
         <div class="row">
@@ -94,7 +94,7 @@ include "header.php";
                                             <td><?php echo $registro[2]?></td>
                                             <td><?php echo $registro[3]?></td>
                                             <td><a href="actualizarProf.php?id=<?php echo $registro[0]?>" title="Editar" style="margin-right: 15px" ><i class="fa-solid fa-marker"></i></a>                                            
-                                            <a href="ver.php?id=<?php echo $registro[0]?>" method="get" title="Borrar"><i class="fa-solid fa-trash-can" style="color: red;"></i></a></td>                                            
+                                            <a href="verProf.php?id=<?php echo $registro[0]?>" method="get" title="Borrar"><i class="fa-solid fa-trash-can" style="color: red;"></i></a></td>                                            
                                         </tr>
                                 <?php
                                     }

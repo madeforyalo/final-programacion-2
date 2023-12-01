@@ -2,7 +2,9 @@
 require "conexion.php";                  
    
 if(isset($_SESSION['id']) && $_SESSION['tipoUsuario']==1){
-    $usuario = $_SESSION['nombre'];
+    $usuario = $_SESSION['usuario'];
+    $nombre = $_SESSION['nombre'];
+    $apellido = $_SESSION['apellido'];
     }
     else{
         echo"Pagina Prohibida. Inicie Sesion";
@@ -33,7 +35,7 @@ include "header.php";
                     <?= $_SESSION['mensaje'] ?>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-                <?php session_unset();} ?>
+                <?php } ?>
             </div>
         </div>
         <div class="row">

@@ -11,7 +11,7 @@ $query=mysqli_query($conn,$sql);
 $resulset= mysqli_fetch_assoc($query);
 
 if ($resulset['usu_usuario'] == $usuario){
-    $_SESSION['mensaje'] = 'El Profesor ya se encuentra cargado';
+    $_SESSION['mensaje'] = 'El usuario ya se encuentra cargado';
     $_SESSION['tipo_mensaje'] = 'danger';
     Header("location: agregar_profesor.php");
 }else{
@@ -26,7 +26,7 @@ if ($resulset['usu_usuario'] == $usuario){
     if ($query2){
         $_SESSION['mensaje'] = 'Los datos se cargaron con exitó!';
         $_SESSION['tipo_mensaje'] = 'success';
-        Header("location: agregarAlumno.php");
+        Header("location: agregar_profesor.php");
     };
 }
 ?>

@@ -9,7 +9,7 @@ include "header.php"?>
         ?>
 
         <form method=get>
-            <a href="eliminar.php?id=<?php echo $paraBorrar?>" title="Eliminar" class="btn btn-primary">Si</a>
+            <a href="eliminarProf.php?id=<?php echo $paraBorrar?>" title="Eliminar" class="btn btn-primary">Si</a>
             <a href="agregar_profesor.php" class="btn btn-primary">No</a>
         </form>
     </div>

@@ -26,14 +26,14 @@ include "header.php";
                 <br>
                 <br>
 
-<a href="agregarAlumno.php">Agregar Alumnos</a>
+<a href="agregarAlumno.php">ABM Alumnos</a>
 <br>
 <br>
 <a href="inscripcion.php">Inscripcion</a>
 <br>
 <br>
 
-<a href="agregar_profesor.php">Agregar Profesor</a>
+<a href="agregar_profesor.php">ABM Profesor</a>
 <br>
 <br>
 
